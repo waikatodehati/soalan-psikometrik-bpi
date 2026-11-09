@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ms" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pengurusan & Panduan Soalan Ujian Psikometrik Korporat</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js for data analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body class="h-full bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-30 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-brand-600 text-white rounded-xl shadow-md">
+                        <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold leading-tight text-slate-900 dark:text-white">PsikoMetrik <span class="text-brand-600 dark:text-brand-400">Pro</span></h1>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sistem Pengurusan & Panduan Soalan Korporat</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs (Desktop) -->
+                <nav class="hidden md:flex space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="tab-btn px-3 py-2 text-sm font-medium rounded-lg flex items-center space-x-2 transition-all">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button onclick="switchTab('bank')" id="nav-bank" class="tab-btn px-3 py-2 text-sm font-medium rounded-lg flex items-center space-x-2 transition-all">
+                        <i data-lucide="database" class="w-4 h-4"></i>
+                        <span>Bank Soalan (42)</span>
+                    </button>
+                    <button onclick="switchTab('simulasi')" id="nav-simulasi" class="tab-btn px-3 py-2 text-sm font-medium rounded-lg flex items-center space-x-2 transition-all">
+                        <i data-lucide="sliders" class="w-4 h-4"></i>
+                        <span>Simulasi Ujian</span>
+                    </button>
+                    <button onclick="switchTab('panduan')" id="nav-panduan" class="tab-btn px-3 py-2 text-sm font-medium rounded-lg flex items-center space-x-2 transition-all">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span>Panduan Strategi</span>
+                    </button>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center space-x-2">
+                    <button id="theme-toggle" class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                        <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="window.print()" class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Cetak / Expor PDF">
+                        <i data-lucide="printer" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Bar -->
+        <div class="md:hidden border-t border-slate-200 dark:border-slate-700 px-2 py-2 flex justify-around bg-slate-50 dark:bg-slate-800/80 backdrop-blur">
+            <button onclick="switchTab('dashboard')" id="mob-nav-dashboard" class="mob-tab-btn flex flex-col items-center py-1 px-2 text-xs font-medium rounded">
+                <i data-lucide="layout-dashboard" class="w-4 h-4 mb-1"></i>
+                <span>Dashboard</span>
+            </button>
+            <button onclick="switchTab('bank')" id="mob-nav-bank" class="mob-tab-btn flex flex-col items-center py-1 px-2 text-xs font-medium rounded">
+                <i data-lucide="database" class="w-4 h-4 mb-1"></i>
+                <span>Bank Soalan</span>
+            </button>
+            <button onclick="switchTab('simulasi')" id="mob-nav-simulasi" class="mob-tab-btn flex flex-col items-center py-1 px-2 text-xs font-medium rounded">
+                <i data-lucide="sliders" class="w-4 h-4 mb-1"></i>
+                <span>Simulasi</span>
+            </button>
+            <button onclick="switchTab('panduan')" id="mob-nav-panduan" class="mob-tab-btn flex flex-col items-center py-1 px-2 text-xs font-medium rounded">
+                <i data-lucide="book-open" class="w-4 h-4 mb-1"></i>
+                <span>Panduan</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 custom-scrollbar overflow-y-auto">
+
+        <!-- TAB 1: DASHBOARD -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <!-- Welcome Banner -->
+            <div class="bg-gradient-to-r from-brand-900 via-brand-800 to-indigo-900 rounded-2xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                    <i data-lucide="award" class="w-72 h-72"></i>
+                </div>
+                <div class="relative z-10 max-w-3xl">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/30 text-brand-200 border border-brand-400/30 mb-4">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                        Edisi Penilaian Kerja Korporat
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Sistem Pengurusan Profil & Kunci Skoring Psikometrik</h2>
+                    <p class="mt-2 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        Sistem ini merangkumi keseluruhan 42 soalan merentasi 7 modul teras tingkah laku organisasi. Gunakan modul ini untuk memahami rationale jawapan, menyemak bank soalan, atau menjalankan simulasi ujian secara langsung.
+                    </p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <button onclick="switchTab('simulasi')" class="inline-flex items-center space-x-2 bg-white text-brand-900 hover:bg-brand-50 px-4 py-2.5 rounded-xl font-semibold text-sm transition shadow-sm">
+                            <i data-lucide="play-circle" class="w-4 h-4"></i>
+                            <span>Mulakan Simulasi Ujian</span>
+                        </button>
+                        <button onclick="switchTab('bank')" class="inline-flex items-center space-x-2 bg-brand-700/60 hover:bg-brand-700 text-white border border-brand-500/40 px-4 py-2.5 rounded-xl font-semibold text-sm transition">
+                            <i data-lucide="search" class="w-4 h-4"></i>
+                            <span>Semak Bank Soalan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metric Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Jumlah Soalan</span>
+                        <i data-lucide="file-text" class="w-5 h-5 text-brand-600"></i>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-3xl font-extrabold text-slate-900 dark:text-white">42</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 block mt-1">7 Modul Berkelompok</span>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Skor Tinggi (4-5)</span>
+                        <i data-lucide="trending-up" class="w-5 h-5 text-emerald-500"></i>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400" id="stat-high-score">14</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 block mt-1">Sifat Positif Utama</span>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Skor Rendah (1-2)</span>
+                        <i data-lucide="shield-alert" class="w-5 h-5 text-rose-500"></i>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-3xl font-extrabold text-rose-600 dark:text-rose-400" id="stat-low-score">12</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 block mt-1">Sifat Mengganggu/Ekstrem</span>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Zon Selamat (2-3/3-4)</span>
+                        <i data-lucide="scale" class="w-5 h-5 text-amber-500"></i>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-3xl font-extrabold text-amber-600 dark:text-amber-400" id="stat-mid-score">16</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 block mt-1">Persamaan Sederhana</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Module Score Profiles Chart -->
+                <div class="lg:col-span-2 bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-brand-600"></i>
+                            Taburan Sasaran Skor Mengikut Modul
+                        </h3>
+                        <span class="text-xs text-slate-500">Penilaian Ideal Korporat</span>
+                    </div>
+                    <div class="h-64 sm:h-72">
+                        <canvas id="moduleChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Donut Chart Score Strategy -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-4">
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-brand-600"></i>
+                            Keseimbangan Skoring Ideal
+                        </h3>
+                        <div class="h-48 relative flex items-center justify-center">
+                            <canvas id="scoreDistributionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        <span class="font-semibold text-slate-700 dark:text-slate-300">Nota Strategi:</span> Mengelakkan jawapan terlalu ekstrem pada soalan persepsi peribadi menjaga profil daripada kelihatan defensive atau berpura-pura.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modules List Grid -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="layers" class="w-5 h-5 text-brand-600"></i>
+                    Ringkasan 7 Modul Ujian Psikometrik
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="module-cards-container">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: BANK SOALAN -->
+        <section id="tab-bank" class="tab-content hidden space-y-6">
+            <!-- Filter & Search Controls Bar -->
+            <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+                <!-- Search Input -->
+                <div class="relative flex-1">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-input" placeholder="Carian soalan (Bahasa Inggeris atau Melayu)..." class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 dark:text-slate-100">
+                </div>
+
+                <!-- Dropdown Filters -->
+                <div class="flex flex-wrap sm:flex-nowrap gap-3 items-center">
+                    <!-- Module Filter -->
+                    <select id="filter-module" class="w-full sm:w-auto px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <option value="all">Semua Modul (1 - 7)</option>
+                        <option value="1">Modul 1: Kecerdasan Emosi</option>
+                        <option value="2">Modul 2: Kepimpinan & Pematuhan</option>
+                        <option value="3">Modul 3: Gaya Kepimpinan</option>
+                        <option value="4">Modul 4: Analisis Data</option>
+                        <option value="5">Modul 5: Kemahiran Interpersonal</option>
+                        <option value="6">Modul 6: Pemikiran Strategik</option>
+                        <option value="7">Modul 7: Penyelesaian Projek</option>
+                    </select>
+
+                    <!-- Target Score Filter -->
+                    <select id="filter-score" class="w-full sm:w-auto px-3 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <option value="all">Semua Julat Skor</option>
+                        <option value="4-5">Skor 4 - 5 (Sangat Setuju)</option>
+                        <option value="3-4">Skor 3 - 4 (Setuju/Sederhana)</option>
+                        <option value="2-3">Skor 2 - 3 (Sederhana/Bantah)</option>
+                        <option value="1-2">Skor 1 - 2 (Sangat Tidak Setuju)</option>
+                    </select>
+
+                    <!-- Reset Filters Button -->
+                    <button id="reset-filters" class="p-2 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl text-slate-600 dark:text-slate-300 transition" title="Tetap Semula Penapis">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Counter Info -->
+            <div class="flex items-center justify-between text-xs sm:text-sm text-slate-500 dark:text-slate-400 px-1">
+                <span>Menunjukkan <strong id="visible-count" class="text-slate-900 dark:text-white">42</strong> daripada 42 soalan</span>
+                <button onclick="copyAllQuestionsData()" class="text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    Salin Semua Rekod
+                </button>
+            </div>
+
+            <!-- Question Table Card -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                <th class="py-3.5 px-4 w-12 text-center">No.</th>
+                                <th class="py-3.5 px-4 min-w-[240px]">Pernyataan Soalan (EN / MS)</th>
+                                <th class="py-3.5 px-4 w-32 text-center">Skor Disyor</th>
+                                <th class="py-3.5 px-4 min-w-[180px]">Kunci Kompetensi</th>
+                                <th class="py-3.5 px-4 min-w-[240px]">Rationale Korporat</th>
+                                <th class="py-3.5 px-4 w-16 text-center">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="question-table-body" class="divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+                            <!-- Dynamic Table Rows populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: SIMULASI UJIAN -->
+        <section id="tab-simulasi" class="tab-content hidden space-y-6">
+            <!-- Simulator Intro Header -->
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="sliders" class="w-5 h-5 text-brand-600"></i>
+                        Simulasi Penilaian Personaliti Real-Time
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        Jawab 42 soalan di bawah menggunakan skala Likert (1 hingga 5). Sistem akan menilai tahap keselarasan jawapan anda dengan penanda aras ideal korporat.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="autoFillIdeal()" class="px-3.5 py-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-xl text-xs font-semibold hover:bg-emerald-100 transition flex items-center gap-1.5">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        Isi Penanda Aras Ideal
+                    </button>
+                    <button onclick="resetSimulation()" class="px-3.5 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-600 transition flex items-center gap-1.5">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        Semula
+                    </button>
+                </div>
+            </div>
+
+            <!-- Score Summary Dashboard Banner -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Alignment Meter Card -->
+                <div class="bg-gradient-to-br from-slate-900 to-brand-950 text-white p-6 rounded-2xl shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-300">Keselarasan Korporat</span>
+                        <i data-lucide="gauge" class="w-6 h-6 text-brand-400"></i>
+                    </div>
+                    <div class="my-4 text-center">
+                        <div class="text-5xl font-black text-brand-400 tracking-tight" id="sim-alignment-score">0%</div>
+                        <p class="text-xs text-slate-300 mt-2" id="sim-alignment-status">Sila lengkapkan soalan simulasi</p>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                        <div id="sim-alignment-bar" class="bg-brand-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Simulation Progress Card -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500">
+                        <span class="text-xs font-bold uppercase tracking-wider">Kemajuan Jawab</span>
+                        <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-4xl font-extrabold text-slate-900 dark:text-white" id="sim-answered-count">0</span>
+                            <span class="text-sm text-slate-500 dark:text-slate-400">/ 42 Soalan</span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2" id="sim-progress-text">0% Selesai</p>
+                    </div>
+                    <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div id="sim-progress-bar" class="bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Realtime Feedback Box -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-500">
+                        <span class="text-xs font-bold uppercase tracking-wider">Ulasan Profil Singkat</span>
+                        <i data-lucide="message-square" class="w-5 h-5 text-amber-500"></i>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed my-2" id="sim-feedback-box">
+                        Isikan respons anda untuk melihat analisa peribadi berkenaan orientasi kepimpinan, disiplin, dan empati anda.
+                    </p>
+                    <span class="text-[11px] text-slate-400 font-medium">Berdasarkan piawaian HR korporat</span>
+                </div>
+            </div>
+
+            <!-- Simulation Questions Form Container -->
+            <div id="simulation-questions-container" class="space-y-4">
+                <!-- Question Cards populated dynamically via JS -->
+            </div>
+
+            <!-- Bottom Submit / Analyze Action -->
+            <div class="flex justify-end py-4">
+                <button onclick="scrollToTop()" class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md transition flex items-center gap-2">
+                    <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                    Kembali Ke Atas & Semak Keputusan
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 4: PANDUAN STRATEGI -->
+        <section id="tab-panduan" class="tab-content hidden space-y-6">
+            <!-- Strategic Overview Header -->
+            <div class="bg-white dark:bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                <div class="max-w-3xl">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Panduan Lengkap Penilaian</span>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">Strategi Menjawab Ujian Psikometrik Korporat</h2>
+                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Ujian psikometrik korporat direka untuk mengukur profil personaliti, kebolehpercayaan, serta tahap penyesuaian sosial calon terhadap organisasi. Berikut adalah prinsip teras yang digunakan oleh perunding sumber manusia (HR) untuk menilai borang anda.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5 Core Competencies Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Competency 1 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-lg">
+                        1
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-base">Kebolehpercayaan & Disiplin</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Diukur menerusi penyelesaian tugas tepat pada masa, pematuhan jadual, dan struktur kerja. Soalan berkaitan sikap tangguh kerja mesti ditanda dengan skor **1 atau 2**.
+                    </p>
+                    <div class="pt-2 text-xs font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Target Skor Utama: 4 - 5
+                    </div>
+                </div>
+
+                <!-- Competency 2 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-lg">
+                        2
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-base">Kerjasama Pasukan & Empati</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Menilai kemampuan mendengar, sokongan interpersonal, dan diplomasi. Mengaku mahu "menang dengan mengorbankan orang lain" akan merosakkan skor kerja berpasukan.
+                    </p>
+                    <div class="pt-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Target Skor Utama: 4 - 5
+                    </div>
+                </div>
+
+                <!-- Competency 3 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-lg">
+                        3
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-base">Kepimpinan & Ketegasan</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Kesediaan memimpin perbincangan dan menyuarakan pendapat secara proaktif. Elakkan kelihatan terlalu mendominasi (*taking over*) dengan memilih skor pertengahan **3 atau 4**.
+                    </p>
+                    <div class="pt-2 text-xs font-semibold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Target Skor Utama: 3 - 4
+                    </div>
+                </div>
+
+                <!-- Competency 4 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold text-lg">
+                        4
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-base">Kestabilan Emosi</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Menilai ketenangan bawah tekanan dan pembawaan diri berhemah. Mengaku mudah emosi atau terlalu agresif semasa berhujah perlu dihindari.
+                    </p>
+                    <div class="pt-2 text-xs font-semibold text-purple-600 dark:text-purple-400 flex items-center gap-1">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Target Skor Utama: 4 - 5
+                    </div>
+                </div>
+
+                <!-- Competency 5 -->
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-lg">
+                        5
+                    </div>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-base">Pemikiran Analitikal & Inovasi</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Penerimaan idea baharu, pemikiran berasaskan fakta, dan kebolehan menyelesaikan masalah kompleks tanpa terikat pada kaedah tegar secara keterlaluan.
+                    </p>
+                    <div class="pt-2 text-xs font-semibold text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                        <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Target Skor Utama: 3 - 4
+                    </div>
+                </div>
+
+                <!-- Strategic Rule Card -->
+                <div class="bg-gradient-to-br from-brand-600 to-indigo-700 text-white p-6 rounded-2xl shadow-sm space-y-3 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest bg-white/20 px-2.5 py-1 rounded-full">Peraturan Masuk Korporat</span>
+                        <h4 class="font-bold text-lg mt-2">Prinsip Moderasi Jawapan</h4>
+                        <p class="text-xs text-slate-100 leading-relaxed mt-1">
+                            Sistem penilaian psikometrik moden dilengkapi algoritma pengesanan keikhlasan (*Lie Scale*). Jangan memilih skor 5 untuk semua soalan positif atau skor 1 untuk semua soalan berisiko.
+                        </p>
+                    </div>
+                    <div class="text-xs text-brand-100 font-medium underline">
+                        Imbangkan antara keyakinan dan fleksibiliti.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Do's & Don'ts Table -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-6 space-y-4">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="arrow-left-right" class="w-5 h-5 text-brand-600"></i>
+                    Panduan Berlawanan: Apa Yang Perlu Buat vs Elakkan
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <!-- DO List -->
+                    <div class="space-y-3 bg-emerald-50/50 dark:bg-emerald-950/20 p-4 rounded-xl border border-emerald-100 dark:border-emerald-900/40">
+                        <h4 class="font-bold text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
+                            <i data-lucide="check" class="w-4 h-4"></i> DIBENARKAN / DIGALAKKAN
+                        </h4>
+                        <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>Menunjukkan komitmen tinggi terhadap penyelesaian kerja mengikut jadual (*deadline*).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>Mempunyai perancangan projek teratur dan penetapan objektif yang jelas.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>Mendengar pandangan orang lain dan menunjukkan empati ketika berpasukan.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span>Menyuarakan hujah secara logik dan rasional tanpa sikap emosi.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- DONT List -->
+                    <div class="space-y-3 bg-rose-50/50 dark:bg-rose-950/20 p-4 rounded-xl border border-rose-100 dark:border-rose-900/40">
+                        <h4 class="font-bold text-rose-700 dark:text-rose-400 flex items-center gap-2">
+                            <i data-lucide="x" class="w-4 h-4"></i> DILARANG / DIELAKKAN
+                        </h4>
+                        <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5"></i>
+                                <span>Mengaku suka membuat kerja pada saat-saat akhir (*last minute*).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5"></i>
+                                <span>Menyatakan diri sebagai "pemberontak" (*rebel*) atau enggan mengikut prosedur.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5"></i>
+                                <span>Mengejar kemenangan diri sehingga mengabaikan kebajikan rakan sepasukan.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5"></i>
+                                <span>Membiarkan perbualan atau idea terlalu berkonsepkan sehingga sukar dilaksanakan.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Detail Soalan -->
+    <div id="question-modal" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-xl w-full p-6 border border-slate-200 dark:border-slate-700 shadow-xl space-y-4">
+            <div class="flex items-start justify-between border-b border-slate-100 dark:border-slate-700 pb-3">
+                <div class="flex items-center space-x-2">
+                    <span id="modal-q-no" class="px-2.5 py-1 bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-200 text-xs font-bold rounded-lg">Q1</span>
+                    <span id="modal-q-mod" class="text-xs font-medium text-slate-500 dark:text-slate-400">Modul 1</span>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <div>
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Bahasa Inggeris (Asal)</span>
+                    <p id="modal-q-en" class="text-base font-bold text-slate-900 dark:text-white mt-0.5"></p>
+                </div>
+                <div>
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Terjemahan Bahasa Melayu</span>
+                    <p id="modal-q-ms" class="text-sm text-slate-700 dark:text-slate-300 italic mt-0.5"></p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <div class="bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase block">Skor Disyorkan</span>
+                        <span id="modal-q-score" class="text-base font-extrabold text-brand-600 dark:text-brand-400"></span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-900 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase block">Kunci Kompetensi</span>
+                        <span id="modal-q-key" class="text-xs font-semibold text-slate-800 dark:text-slate-200"></span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 dark:bg-slate-900 p-3.5 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase block mb-1">Rationale Korporat</span>
+                    <p id="modal-q-rationale" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-2">
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold hover:bg-slate-200 transition">
+                    Tutup Detail
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 flex items-center space-x-3 text-xs font-medium">
+        <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+        <span id="toast-message">Mesej pemberitahuan</span>
+    </div>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // DATASET COMPLETE 42 QUESTIONS
+        const psychometricData = [
+            // Modul 1
+            { id: 1, module: 1, moduleName: "Kecerdasan Emosi & Kebolehan Praktikal", en: "I can get lost in my imagination and lose touch with reality", ms: "Saya boleh hanyut dalam khayalan saya dan hilang hubungan dengan realiti.", score: "1-2", key: "Realistik & Praktikal", rationale: "Majikan mengutamakan pekerja yang berfokuskan realiti, berpijak di bumi nyata, dan praktikal." },
+            { id: 2, module: 1, moduleName: "Kecerdasan Emosi & Kebolehan Praktikal", en: "I avoid overcomplicating things and keep it simple", ms: "Saya mengelak daripada merumitkan keadaan dan mengekalkannya dalam bentuk yang ringkas.", score: "4-5", key: "Kecekapan Operasi", rationale: "Memudahkan aliran kerja dan penyelesaian masalah tanpa kerumitan yang tidak perlu." },
+            { id: 3, module: 1, moduleName: "Kecerdasan Emosi & Kebolehan Praktikal", en: "My desire for precision and accuracy can become obsessive", ms: "Keinginan saya untuk ketepatan dan kepersisan boleh menjadi terlalu taksub.", score: "2-3", key: "Kawalan Kualiti Seimbang", rationale: "Menunjukkan ketelitian tanpa menyebabkan kerosakan proses (analysis paralysis)." },
+            { id: 4, module: 1, moduleName: "Kecerdasan Emosi & Kebolehan Praktikal", en: "I am direct and to the point", ms: "Saya seorang yang terus terang dan langsung kepada sasaran.", score: "3-4", key: "Komunikasi Telus", rationale: "Menyampaikan maklumat secara jelas, telus, dan efisien di tempat kerja." },
+            { id: 5, module: 1, moduleName: "Kecerdasan Emosi & Kebolehan Praktikal", en: "Sometimes, I am too focused on time management", ms: "Kadangkala, saya terlalu fokus pada pengurusan masa.", score: "2-3", key: "Pematuhan Masa Fleksibel", rationale: "Berdisiplin dengan masa tetapi kekal boleh menyesuaikan diri mengikut situasi." },
+            { id: 6, module: 1, moduleName: "Kecerdasan Emosi & Kebolehan Praktikal", en: "I work in a flexible, unstructured way", ms: "Saya bekerja secara fleksibel dan tidak berstruktur.", score: "1-2", key: "Struktur & Disiplin", rationale: "Majikan memerlukan pematuhan kepada SOP, perancangan yang jelas, dan disiplin." },
+
+            // Modul 2
+            { id: 7, module: 2, moduleName: "Kepimpinan, Kerja Berpasukan & Pematuhan", en: "I often prioritise the feelings of others above my own", ms: "Saya sering mengutamakan perasaan orang lain berbanding perasaan saya sendiri.", score: "2-3", key: "Ketegasan Profesional", rationale: "Berempati tetapi kekal tegas menjaga keutamaan peribadi dan kerja." },
+            { id: 8, module: 2, moduleName: "Kepimpinan, Kerja Berpasukan & Pematuhan", en: "When working in a group, I always try to lead discussions", ms: "Apabila bekerja dalam kumpulan, saya sentiasa cuba mengetuai perbincangan.", score: "3-4", key: "Inisiatif Kepimpinan", rationale: "Menunjukkan keupayaan memimpin tanpa mendominasi rakan berpasukan." },
+            { id: 9, module: 2, moduleName: "Kepimpinan, Kerja Berpasukan & Pematuhan", en: "I strive to outperform my colleagues", ms: "Saya berusaha untuk mengatasi prestasi rakan sekerja saya.", score: "2-3", key: "Semangat Pasukan", rationale: "Berorientasikan pencapaian tetapi tidak mengorbankan keharmonian kumpulan." },
+            { id: 10, module: 2, moduleName: "Kepimpinan, Kerja Berpasukan & Pematuhan", en: "I appear serious most of the time", ms: "Saya kelihatan serius hampir sepanjang masa.", score: "3-4", key: "Profesionalisme", rationale: "Fokus dan komited terhadap tanggungjawab yang diamanahkan." },
+            { id: 11, module: 2, moduleName: "Kepimpinan, Kerja Berpasukan & Pematuhan", en: "Others see me as a rebel", ms: "Orang lain melihat saya sebagai seorang pemberontak.", score: "1-2", key: "Kepatuhan Organisasi", rationale: "Menghormati peraturan, rantaian arahan, dan etika syarikat." },
+            { id: 12, module: 2, moduleName: "Kepimpinan, Kerja Berpasukan & Pematuhan", en: "My ideas are usually conventional", ms: "Idea saya biasanya adalah konvensional.", score: "2-3", key: "Kreativiti Seimbang", rationale: "Menghargai kaedah terbukti sambil kekal terbuka kepada inovasi." },
+
+            // Modul 3
+            { id: 13, module: 3, moduleName: "Gaya Kepimpinan & Pembawaan Diri", en: "My need to take charge in a group can be perceived as taking over", ms: "Keperluan saya untuk memegang teraju dalam kumpulan boleh dianggap sebagai mengambil alih kuasa.", score: "2-3", key: "Kepimpinan Kolaboratif", rationale: "Memimpin dengan mengambil kira penyertaan ahli pasukan yang lain." },
+            { id: 14, module: 3, moduleName: "Gaya Kepimpinan & Pembawaan Diri", en: "I am known as a competitive person", ms: "Saya dikenali sebagai seorang yang mempunyai daya saing.", score: "3-4", key: "Daya Usaha & Dorongan", rationale: "Bermotivasi tinggi untuk mencapai kualiti dan sasaran prestasi." },
+            { id: 15, module: 3, moduleName: "Gaya Kepimpinan & Pembawaan Diri", en: "I often sacrifice my own needs out of compassion for others", ms: "Saya sering mengorbankan keperluan diri sendiri atas dasar belas kasihan terhadap orang lain.", score: "2-3", key: "Keseimbangan Emosi", rationale: "Prihatin tetapi tidak mengorbankan efisiensi atau batasan peribadi." },
+            { id: 16, module: 3, moduleName: "Gaya Kepimpinan & Pembawaan Diri", en: "I am flexible and don't always stick to the process", ms: "Saya seorang yang fleksibel dan tidak selalu berpegang pada proses/prosedur.", score: "2-3", key: "Pematuhan Prosedur (SOP)", rationale: "Menghormati kawalan kualiti syarikat dengan ruang fleksibiliti munasabah." },
+            { id: 17, module: 3, moduleName: "Gaya Kepimpinan & Pembawaan Diri", en: "Others may consider my ideas too radical", ms: "Orang lain mungkin menganggap idea saya terlalu radikal.", score: "2-3", key: "Inovasi Praktikal", rationale: "Menyumbang pembaharuan yang realistik dan boleh dilaksanakan organisasi." },
+            { id: 18, module: 3, moduleName: "Gaya Kepimpinan & Pembawaan Diri", en: "I have a measured and contained demeanour", ms: "Saya mempunyai pembawaan diri yang terkawal, matang, dan berhemah.", score: "4-5", key: "Kestabilan Emosi", rationale: "Bertenang dan matang semasa menghadapi krisis atau tekanan kerja." },
+
+            // Modul 4
+            { id: 19, module: 4, moduleName: "Analisis Data, Ketelitian & Adaptabiliti", en: "I avoid committing to new ideas until I have gathered all the facts", ms: "Saya mengelak komited kepada idea baharu sehingga mengumpul semua fakta.", score: "3-4", key: "Pembuatan Keputusan Berasas Data", rationale: "Bertindak berasaskan maklumat yang sahih dan analisis objektif." },
+            { id: 20, module: 4, moduleName: "Analisis Data, Ketelitian & Adaptabiliti", en: "I can be so focused on my commitments that I lack spontaneity", ms: "Saya boleh begitu fokus pada komitmen sehingga kekurangan sifat spontan.", score: "2-3", key: "Keseimbangan Komitmen", rationale: "Berdisiplin menepati janji tanpa menjadi terlalu tegar (rigid)." },
+            { id: 21, module: 4, moduleName: "Analisis Data, Ketelitian & Adaptabiliti", en: "When I present my ideas to others, they may come across as too conceptual and complex", ms: "Pembentangan idea saya mungkin kelihatan terlalu berkonsepkan dan kompleks.", score: "2-3", key: "Kejelasan Komunikasi", rationale: "Mampu menyampaikan idea secara mudah dan praktikal." },
+            { id: 22, module: 4, moduleName: "Analisis Data, Ketelitian & Adaptabiliti", en: "I take a hard-nosed and logical approach when challenging others", ms: "Saya mengambil pendekatan yang tegas dan logik apabila mencabar orang lain.", score: "3-4", key: "Pemikiran Analitikal", rationale: "Mempertahankan hujah secara fakta dan logik dengan profesional." },
+            { id: 23, module: 4, moduleName: "Analisis Data, Ketelitian & Adaptabiliti", en: "Sometimes I am so considerate of others that I don't put my own view forward", ms: "Kadangkala saya terlalu bertimbang rasa sehingga tidak mengutarakan pandangan sendiri.", score: "2-3", key: "Keyakinan Bersuara", rationale: "Berani menyuarakan pandangan peribadi demi kebaikan pasukan." },
+            { id: 24, module: 4, moduleName: "Analisis Data, Ketelitian & Adaptabiliti", en: "I normally stick with the tried-and-tested", ms: "Saya biasanya berpegang kepada kaedah yang telah diuji dan terbukti keberkesanannya.", score: "2-3", key: "Keterbukaan Perubahan", rationale: "Menghormati rekod kejayaan lalu tetapi sedia menerima pembaharuan." },
+
+            // Modul 5
+            { id: 25, module: 5, moduleName: "Kemahiran Interpersonal & Pengurusan Tugasan", en: "I tend to listen more than talk", ms: "Saya cenderung untuk lebih banyak mendengar daripada bercakap.", score: "3-4", key: "Kemahiran Mendengar", rationale: "Prihatin dan menghormati pandangan rakan sekerja." },
+            { id: 26, module: 5, moduleName: "Kemahiran Interpersonal & Pengurusan Tugasan", en: "I tend to be relaxed about time management", ms: "Saya cenderung bersikap santai mengenai pengurusan masa.", score: "1-2", key: "Integriti Masa", rationale: "Mengutamakan ketepatan masa dan penyelesaian tugasan mengikut jadual." },
+            { id: 27, module: 5, moduleName: "Kemahiran Interpersonal & Pengurusan Tugasan", en: "Sometimes I socialise too much", ms: "Kadangkala saya terlalu banyak bersosial.", score: "2-3", key: "Fokus Tugasan", rationale: "Mesra bergaul tetapi tidak membiarkan perbualan mengganggu produktiviti." },
+            { id: 28, module: 5, moduleName: "Kemahiran Interpersonal & Pengurusan Tugasan", en: "I can find it hard to work without formal goals and objectives", ms: "Saya rasa sukar untuk bekerja tanpa matlamat dan objektif yang rasional/jelas.", score: "4-5", key: "Fokus Matlamat (Goal-Oriented)", rationale: "Bekerja dengan hala tuju dan sasaran prestasi yang jelas." },
+            { id: 29, module: 5, moduleName: "Kemahiran Interpersonal & Pengurusan Tugasan", en: "In an argument, I tend to be the one who compromises", ms: "Dalam pertelingkahan/hujah, saya cenderung menjadi pihak yang berkompromi.", score: "3-4", key: "Kemahiran Diplomasi", rationale: "Utamakan penyelesaian konflik secara damai demi objektif bersama." },
+            { id: 30, module: 5, moduleName: "Kemahiran Interpersonal & Pengurusan Tugasan", en: "I can be too outgoing and not maintain my boundaries", ms: "Saya boleh menjadi terlalu ramah sehingga tidak menjaga batas peribadi.", score: "2-3", key: "Batasan Profesional", rationale: "Peramah tetapi kekal menjaga etika serta batasan profesional di pejabat." },
+
+            // Modul 6
+            { id: 31, module: 6, moduleName: "Pemikiran Strategik & Daya Saing Pasukan", en: "I tend to be spontaneous when making decisions", ms: "Saya cenderung bertindak secara spontan apabila membuat keputusan.", score: "2-3", key: "Penilaian Risiko", rationale: "Membuat keputusan berasaskan pertimbangan matang dan analisis." },
+            { id: 32, module: 6, moduleName: "Pemikiran Strategik & Daya Saing Pasukan", en: "I am quick to point out the logical flaws in an argument", ms: "Saya cepat menunjukkan kecacatan logik dalam sesuatu hujah.", score: "3-4", key: "Penyelesaian Masalah Analitikal", rationale: "Peka terhadap kelemahan hujah atau pelan tindakan." },
+            { id: 33, module: 6, moduleName: "Pemikiran Strategik & Daya Saing Pasukan", en: "My ideas can be too abstract and difficult to understand", ms: "Idea saya boleh menjadi terlalu abstrak dan sukar difahami.", score: "2-3", key: "Penyampaian Keberkesanan", rationale: "Memastikan skop idea boleh dicapai dan difahami pasukan." },
+            { id: 34, module: 6, moduleName: "Pemikiran Strategik & Daya Saing Pasukan", en: "I am conservative when considering new ideas", ms: "Saya bersifat konservatif apabila pertimbangkan idea baharu.", score: "2-3", key: "Adaptabiliti Inovatif", rationale: "Terbuka menilai kaedah baharu untuk memajukan perniagaan." },
+            { id: 35, module: 6, moduleName: "Pemikiran Strategik & Daya Saing Pasukan", en: "I am most effective in one-on-one conversations", ms: "Saya paling berkesan dalam perbualan secara peribadi (satu lawan satu).", score: "3-4", key: "Pengurusan Hubungan Peribadi", rationale: "Cekap membina komunikasi mendalam secara individu." },
+            { id: 36, module: 6, moduleName: "Pemikiran Strategik & Daya Saing Pasukan", en: "I can become too driven when working towards my goals", ms: "Saya boleh menjadi terlalu terdorong apabila berusaha mencapai matlamat saya.", score: "2-3", key: "Tekanan Kerja Keseimbangan", rationale: "Gigih mencapai matlamat tanpa menjejaskan kesejahteraan kendiri." },
+
+            // Modul 7
+            { id: 37, module: 7, moduleName: "Penyelesaian Projek & Keharmonian Pasukan", en: "I always establish clear objectives for my projects", ms: "Saya sentiasa menetapkan objektif yang jelas untuk projek-projek saya.", score: "4-5", key: "Pengurusan Projek", rationale: "Merancang skop, jangka masa, dan sasaran kerja secara teratur." },
+            { id: 38, module: 7, moduleName: "Penyelesaian Projek & Keharmonian Pasukan", en: "I can struggle to assert myself in group situations", ms: "Saya mungkin sukar untuk menegaskan pendirian diri dalam situasi berkumpulan.", score: "1-2", key: "Keyakinan Diri", rationale: "Berani menyumbang pandangan dan mempertahankan keputusan pasukan." },
+            { id: 39, module: 7, moduleName: "Penyelesaian Projek & Keharmonian Pasukan", en: "I can be so focused on the logic of an argument that I hurt others' feelings", ms: "Saya boleh begitu fokus pada logik hujah sehingga menyakiti perasaan orang lain.", score: "2-3", key: "Kecerdasan Sosial", rationale: "Mengimbangi kebenaran logik dengan cara penyampaian berhemah." },
+            { id: 40, module: 7, moduleName: "Penyelesaian Projek & Keharmonian Pasukan", en: "I can be too spontaneous and leave projects unfinished", ms: "Saya boleh menjadi terlalu spontan dan meninggalkan projek tanpa disiapkan.", score: "1-2", key: "Penyelesaian Tugas (Akuntabiliti)", rationale: "Menyiapkan setiap komitmen projek yang telah diamanahkan." },
+            { id: 41, module: 7, moduleName: "Penyelesaian Projek & Keharmonian Pasukan", en: "I come across as extraverted and gregarious", ms: "Saya kelihatan sebagai seorang yang periang, mesra, dan suka bersosial.", score: "3-4", key: "Perwatakan Positif", rationale: "Mudah didampingi dan mewujudkan suasana kerja bersemangat." },
+            { id: 42, module: 7, moduleName: "Penyelesaian Projek & Keharmonian Pasukan", en: "My cautious approach can make me resistant to change", ms: "Pendekatan berhati-hati saya boleh menjadikan saya sukar menerima perubahan.", score: "2-3", key: "Kecekalan & Adaptasi", rationale: "Berhati-hati mengurus risiko tetapi bersedia mendepani perubahan." }
+        ];
+
+        // User simulation answers state: { [qId]: number (1..5) }
+        let simulationAnswers = {};
+
+        // App Initialization
+        window.addEventListener('DOMContentLoaded', () => {
+            initLucideIcons();
+            initTheme();
+            renderDashboardModules();
+            initDashboardCharts();
+            renderQuestionTable(psychometricData);
+            renderSimulationQuestions();
+            setupEventListeners();
+            switchTab('dashboard');
+        });
+
+        function initLucideIcons() {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        // Theme Toggle (Light / Dark)
+        function initTheme() {
+            const themeBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            // Default dark mode check or user preference
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                themeIcon.setAttribute('data-lucide', 'sun');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.setAttribute('data-lucide', 'moon');
+            }
+            initLucideIcons();
+
+            themeBtn.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.setAttribute('data-lucide', 'moon');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.setAttribute('data-lucide', 'sun');
+                }
+                initLucideIcons();
+            });
+        }
+
+        // Navigation Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            // Desktop Tab Styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-3 py-2 text-sm font-medium rounded-lg flex items-center space-x-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all';
+            });
+            const activeDesktop = document.getElementById(`nav-${tabId}`);
+            if (activeDesktop) {
+                activeDesktop.className = 'tab-btn px-3 py-2 text-sm font-semibold rounded-lg flex items-center space-x-2 bg-brand-600 text-white shadow-sm transition-all';
+            }
+
+            // Mobile Tab Styles
+            document.querySelectorAll('.mob-tab-btn').forEach(btn => {
+                btn.className = 'mob-tab-btn flex flex-col items-center py-1 px-2 text-xs font-medium rounded text-slate-600 dark:text-slate-400';
+            });
+            const activeMobile = document.getElementById(`mob-nav-${tabId}`);
+            if (activeMobile) {
+                activeMobile.className = 'mob-tab-btn flex flex-col items-center py-1 px-2 text-xs font-bold rounded text-brand-600 dark:text-brand-400';
+            }
+
+            initLucideIcons();
+        }
+
+        // Dashboard Modules Render
+        function renderDashboardModules() {
+            const container = document.getElementById('module-cards-container');
+            container.innerHTML = '';
+
+            const modulesMeta = [
+                { id: 1, title: "Modul 1: Kecerdasan Emosi", count: 6, icon: "heart-handshake", color: "blue" },
+                { id: 2, title: "Modul 2: Kepimpinan & Pematuhan", count: 6, icon: "users", color: "emerald" },
+                { id: 3, title: "Modul 3: Gaya Kepimpinan", count: 6, icon: "user-check", color: "indigo" },
+                { id: 4, title: "Modul 4: Analisis Data", count: 6, icon: "line-chart", color: "purple" },
+                { id: 5, title: "Modul 5: Kemahiran Interpersonal", count: 6, icon: "messages-square", color: "amber" },
+                { id: 6, title: "Modul 6: Pemikiran Strategik", count: 6, icon: "compass", color: "rose" },
+                { id: 7, title: "Modul 7: Penyelesaian Projek", count: 6, icon: "check-square", color: "teal" }
+            ];
+
+            modulesMeta.forEach(m => {
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-between';
+                card.onclick = () => {
+                    document.getElementById('filter-module').value = m.id;
+                    filterQuestions();
+                    switchTab('bank');
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="p-2 bg-${m.color}-50 dark:bg-${m.color}-950 text-${m.color}-600 dark:text-${m.color}-400 rounded-lg">
+                                <i data-lucide="${m.icon}" class="w-5 h-5"></i>
+                            </span>
+                            <span class="text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-full">
+                                6 Soalan
+                            </span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-sm">${m.title}</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Soalan Q${(m.id-1)*6 + 1} hingga Q${m.id*6}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between text-xs text-brand-600 dark:text-brand-400 font-semibold">
+                        <span>Lihat Modul Ini</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            initLucideIcons();
+        }
+
+        // Charts Initialization
+        function initDashboardCharts() {
+            // Module score chart
+            const ctxModule = document.getElementById('moduleChart').getContext('2d');
+            new Chart(ctxModule, {
+                type: 'bar',
+                data: {
+                    labels: ['M1: Emosi', 'M2: Pematuhan', 'M3: Kepimpinan', 'M4: Analisis', 'M5: Interpersonal', 'M6: Strategik', 'M7: Projek'],
+                    datasets: [
+                        {
+                            label: 'Skor Tinggi Target (4-5)',
+                            data: [1, 1, 1, 0, 2, 0, 2],
+                            backgroundColor: '#10b981'
+                        },
+                        {
+                            label: 'Skor Sederhana Target (2-3/3-4)',
+                            data: [3, 4, 5, 6, 3, 6, 2],
+                            backgroundColor: '#f59e0b'
+                        },
+                        {
+                            label: 'Skor Rendah Target (1-2)',
+                            data: [2, 1, 0, 0, 1, 0, 2],
+                            backgroundColor: '#f43f5e'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, max: 6, ticks: { stepSize: 1 } }
+                    }
+                }
+            });
+
+            // Score Distribution Donut Chart
+            const ctxDonut = document.getElementById('scoreDistributionChart').getContext('2d');
+            new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Skor 4-5 (Sangat Setuju)', 'Skor 2-3 / 3-4 (Zon Selamat)', 'Skor 1-2 (Sangat Tidak Setuju)'],
+                    datasets: [{
+                        data: [7, 23, 12],
+                        backgroundColor: ['#10b981', '#f59e0b', '#f43f5e'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        // Render Question Table in Bank Soalan
+        function renderQuestionTable(data) {
+            const tbody = document.getElementById('question-table-body');
+            tbody.innerHTML = '';
+
+            document.getElementById('visible-count').textContent = data.length;
+
+            if (data.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center py-8 text-slate-400">
+                            <i data-lucide="info" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+                            <p>Tiada soalan ditemui padan dengan carian / penapis anda.</p>
+                        </td>
+                    </tr>
+                `;
+                initLucideIcons();
+                return;
+            }
+
+            data.forEach((item) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-700/50 transition border-b border-slate-100 dark:border-slate-700/60';
+
+                // Badge styling logic
+                let scoreBadgeClass = "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300";
+                if (item.score === "4-5") scoreBadgeClass = "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-300/50";
+                if (item.score === "1-2") scoreBadgeClass = "bg-rose-100 text-rose-800 dark:bg-rose-950/80 dark:text-rose-300 border border-rose-300/50";
+                if (item.score === "2-3" || item.score === "3-4") scoreBadgeClass = "bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300/50";
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 text-center font-bold text-slate-500 text-xs">Q${item.id}</td>
+                    <td class="py-3 px-4">
+                        <div class="font-semibold text-slate-900 dark:text-white text-xs sm:text-sm leading-snug">${item.en}</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 italic mt-0.5">${item.ms}</div>
+                        <span class="inline-block text-[10px] bg-slate-100 dark:bg-slate-700/80 text-slate-500 px-2 py-0.5 rounded mt-1">
+                            Modul ${item.module}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="inline-block px-2.5 py-1 rounded-lg text-xs font-bold ${scoreBadgeClass}">
+                            ${item.score}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        ${item.key}
+                    </td>
+                    <td class="py-3 px-4 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                        ${item.rationale}
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <button onclick="openModal(${item.id})" class="p-1.5 text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-slate-700 rounded-lg transition" title="Lihat Perincian">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            initLucideIcons();
+        }
+
+        // Filtering and Searching Function
+        function filterQuestions() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const selectedModule = document.getElementById('filter-module').value;
+            const selectedScore = document.getElementById('filter-score').value;
+
+            const filtered = psychometricData.filter(item => {
+                const matchesSearch = item.en.toLowerCase().includes(query) || item.ms.toLowerCase().includes(query) || item.key.toLowerCase().includes(query);
+                const matchesModule = selectedModule === 'all' || item.module.toString() === selectedModule;
+                const matchesScore = selectedScore === 'all' || item.score === selectedScore;
+
+                return matchesSearch && matchesModule && matchesScore;
+            });
+
+            renderQuestionTable(filtered);
+        }
+
+        function setupEventListeners() {
+            document.getElementById('search-input').addEventListener('input', filterQuestions);
+            document.getElementById('filter-module').addEventListener('change', filterQuestions);
+            document.getElementById('filter-score').addEventListener('change', filterQuestions);
+            document.getElementById('reset-filters').addEventListener('click', () => {
+                document.getElementById('search-input').value = '';
+                document.getElementById('filter-module').value = 'all';
+                document.getElementById('filter-score').value = 'all';
+                filterQuestions();
+                showToast("Penapis telah ditetap semula.");
+            });
+        }
+
+        // Modal Handler
+        function openModal(id) {
+            const item = psychometricData.find(q => q.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-q-no').textContent = `Soalan Q${item.id}`;
+            document.getElementById('modal-q-mod').textContent = item.moduleName;
+            document.getElementById('modal-q-en').textContent = item.en;
+            document.getElementById('modal-q-ms').textContent = item.ms;
+            document.getElementById('modal-q-score').textContent = `Skor Target: ${item.score}`;
+            document.getElementById('modal-q-key').textContent = item.key;
+            document.getElementById('modal-q-rationale').textContent = item.rationale;
+
+            document.getElementById('question-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('question-modal').classList.add('hidden');
+        }
+
+        // Render Simulation Cards
+        function renderSimulationQuestions() {
+            const container = document.getElementById('simulation-questions-container');
+            container.innerHTML = '';
+
+            psychometricData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-3';
+                card.id = `sim-card-${item.id}`;
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">Soalan ${item.id} / 42 &bull; ${item.moduleName}</span>
+                            <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-0.5">${item.en}</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 italic">${item.ms}</p>
+                        </div>
+                        <span class="shrink-0 text-[11px] font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-lg">
+                            Target: ${item.score}
+                        </span>
+                    </div>
+
+                    <!-- Likert 1 to 5 Radio Scale -->
+                    <div class="pt-2">
+                        <div class="grid grid-cols-5 gap-2 sm:gap-4 text-center">
+                            ${[1, 2, 3, 4, 5].map(val => `
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="sim-q-${item.id}" value="${val}" class="sr-only peer" onchange="setSimAnswer(${item.id}, ${val})">
+                                    <div class="py-2.5 px-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 peer-checked:bg-brand-600 peer-checked:text-white peer-checked:border-brand-600 text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-brand-300 transition">
+                                        <div>${val}</div>
+                                        <div class="text-[9px] font-normal opacity-75 hidden sm:block">
+                                            ${val===1?'Sgt Bantah':val===2?'Bantah':val===3?'Sederhana':val===4?'Setuju':'Sgt Setuju'}
+                                        </div>
+                                    </div>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function setSimAnswer(qId, value) {
+            simulationAnswers[qId] = value;
+            updateSimulationMetrics();
+        }
+
+        function updateSimulationMetrics() {
+            const answeredKeys = Object.keys(simulationAnswers);
+            const count = answeredKeys.length;
+            document.getElementById('sim-answered-count').textContent = count;
+
+            const progressPct = Math.round((count / 42) * 100);
+            document.getElementById('sim-progress-bar').style.width = `${progressPct}%`;
+            document.getElementById('sim-progress-text').textContent = `${progressPct}% Selesai`;
+
+            // Calculate alignment
+            if (count > 0) {
+                let matched = 0;
+                psychometricData.forEach(q => {
+                    const ans = simulationAnswers[q.id];
+                    if (ans) {
+                        const targetRange = q.score.split('-').map(Number);
+                        if (ans >= targetRange[0] && ans <= targetRange[1]) {
+                            matched++;
+                        }
+                    }
+                });
+
+                const alignScore = Math.round((matched / count) * 100);
+                document.getElementById('sim-alignment-score').textContent = `${alignScore}%`;
+                document.getElementById('sim-alignment-bar').style.width = `${alignScore}%`;
+
+                let statusText = "Profil sederhana seimbang";
+                if (alignScore >= 80) statusText = "Sangat Selaras dengan Jangkaan Korporat!";
+                else if (alignScore >= 60) statusText = "Keselarasan Baik - Sesuai untuk Kebanyakan Peranan";
+                else if (alignScore < 60) statusText = "Perlu Penyesuaian Kunci Skoring";
+
+                document.getElementById('sim-alignment-status').textContent = statusText;
+
+                // Feedback generator
+                let feedback = `Anda telah menjawab ${count} daripada 42 soalan. Kadar keselarasan profil anda dengan profil ideal syarikat adalah ${alignScore}%.`;
+                if (alignScore >= 75) {
+                    feedback += " Strategi jawapan anda menunjukkan kepimpinan yang seimbang, disiplin masa tinggi, dan kemahiran interpersonal berhemah.";
+                } else {
+                    feedback += " Perhatikan soalan berkenaan pematuhan masa (Q26, Q40) dan ketegasan peribadi untuk meningkatkan skor.";
+                }
+                document.getElementById('sim-feedback-box').textContent = feedback;
+            }
+        }
+
+        // Auto fill benchmark ideal values
+        function autoFillIdeal() {
+            psychometricData.forEach(q => {
+                let targetVal = 3;
+                if (q.score === "4-5") targetVal = 5;
+                if (q.score === "1-2") targetVal = 1;
+                if (q.score === "3-4") targetVal = 4;
+                if (q.score === "2-3") targetVal = 3;
+
+                simulationAnswers[q.id] = targetVal;
+
+                // update radio DOM
+                const radios = document.getElementsByName(`sim-q-${q.id}`);
+                radios.forEach(r => {
+                    if (parseInt(r.value) === targetVal) {
+                        r.checked = true;
+                    }
+                });
+            });
+
+            updateSimulationMetrics();
+            showToast("Penanda aras ideal telah diisikan!");
+        }
+
+        function resetSimulation() {
+            simulationAnswers = {};
+            psychometricData.forEach(q => {
+                const radios = document.getElementsByName(`sim-q-${q.id}`);
+                radios.forEach(r => r.checked = false);
+            });
+            updateSimulationMetrics();
+            document.getElementById('sim-alignment-score').textContent = "0%";
+            document.getElementById('sim-alignment-bar').style.width = "0%";
+            document.getElementById('sim-alignment-status').textContent = "Sila lengkapkan soalan simulasi";
+            document.getElementById('sim-feedback-box').textContent = "Isikan respons anda untuk melihat analisa peribadi...";
+            showToast("Simulasi telah ditetap semula.");
+        }
+
+        // Utilities
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function copyAllQuestionsData() {
+            const jsonText = JSON.stringify(psychometricData, null, 2);
+            
+            // Fallback execCommand copy for iframe compatibility
+            const tempArea = document.createElement('textarea');
+            tempArea.value = jsonText;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempArea);
+
+            showToast("Data 42 soalan berjaya disalin ke papan keratan (clipboard)!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
